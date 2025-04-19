@@ -4,7 +4,7 @@
 %{
     using std::cout;
     using std::endl;
-    // лексемы
+    // лексемы >>>
 %}
 
 WS     [ \t\n\v]+
@@ -16,7 +16,7 @@ OP     [\+\-\=]
 
 {WS}               /* skip blanks and tabs */
 {OP}               {cout << "operator <" << yytext[0] << ">" << endl; return 1; }
-{DIGIT}{DIGIT1}*   {cout << "  number <" << yytext    << ">" << endl; return 1; }
+{DIGIT1}{DIGIT}*   {cout << "  number <" << yytext    << ">" << endl; return 1; }
 .                  {cout << " UNKNOWN <" << yytext[0] << ">" << endl; return 1; }
 
 %%
