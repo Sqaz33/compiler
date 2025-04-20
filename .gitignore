@@ -3,3 +3,9 @@
 *.exe
 *main
 .vscode/
+
+*.ll
+!llvm/*/*.ll
+
+*.c
+!/*/*.c 
