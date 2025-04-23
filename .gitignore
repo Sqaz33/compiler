@@ -2,7 +2,7 @@
 *.out
 *.exe
 *main
-.vscode/
+*.vscode/
 
 *.ll
 !llvm/*/*.ll
