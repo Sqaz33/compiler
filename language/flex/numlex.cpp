@@ -12,7 +12,7 @@ int yyFlexLexer::yywrap() {
 }
 
 int main() {
-    std::unique_ptr<FlexLexer> lexer = std::make_unique<yyFlexLexer>();
+    auto lexer = std::make_unique<yyFlexLexer>();
     while (lexer->yylex() != 0) {
         // do nothing for now, all is in rules
     }
