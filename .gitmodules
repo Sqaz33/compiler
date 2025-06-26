@@ -1,0 +1,3 @@
+[submodule "book/chapter1/tasks/1.21"]
+	path = book/chapter1/tasks/1.21
+	url = https://github.com/Sqaz33/mycompiler.git
