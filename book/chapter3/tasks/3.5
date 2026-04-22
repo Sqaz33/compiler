@@ -1,0 +1,36 @@
+int foo(int c) {
+BB1:
+    int x1 = 0; 
+    int y1 = 0;
+    goto BB2;
+
+BB2: // do
+    if (c == true) goto BB3;
+    else goto BB4;
+
+BB3: // then
+    x2 = 1;
+    y2 = 2;
+    goto BB5
+
+BB4: // else
+    x3 = fi(x1, x2, x5, x6);
+    y3 = fi(y1, y2, y4);
+    x4 = bar(x3); 
+    y4 = bar(x4);
+    x5 = y4;
+    
+    if (x5 > -2) goto BB6;
+    
+    goto BB5;
+
+BB5: // while
+    x6 = baz(x, y);
+
+    if (x6 > 0) goto BB2;
+    else goto BB6;
+
+BB6:
+    x7 = fi(x1, x2, x3, x4, x5, x6);
+    return x7;
+}
