@@ -20,6 +20,7 @@ x1 - ssa value
 
 * users(x1) - множество ssa value, которые используЮТ x1
 * use(x1) - множество ssa value, которые используЕТ x1
+* replace_uses_with(I, V, N) - заменить все вхождения V в инструкции I на N
 
 Каждая инструкция порождает ssa value: можно переходить от инструкции к ssa value. (Instruction is Value)
 
@@ -30,6 +31,7 @@ SSA graph - это граф, вершины которого - определе�
 # Spare Constant Propagation
 
 ```python
+
 LVs = LatticeSet()   // решётка для всех вершин SSA
 WL = Stack()         // рабочий список (стек)
 
@@ -51,10 +53,14 @@ procedure scp():
   
         LVs[U] = M
   
-        for each I in ssa_users(U):
+        for each I in ssa_users(U): 
             WL.push(ssa_edge(U, I))
             OldVal = LVs[I.lhs()]
-            NewVal = ssa_recompute_def(I.rhs(), U, M)
+            NewVal = ssa_recompute_def(I.rhs(), U, M) // перерасчитать правую часть
             LVs[I.lhs()] = NewVal
-            propagate(I, NewVal)
+            propagate(I, NewVal) // заменить все использования I на NewVal
 ```
+
+Затем ненужные переменные удаляются DCE.
+
+# Spare Conditional Constant Propagation (SCP + CFG)
