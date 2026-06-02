@@ -3,6 +3,11 @@
 *.exe
 *main
 *.vscode/
+*.s
+*.o
+*.out
+*.a
 
 *.ll
 !llvm/*/*.ll
+text
