@@ -20,6 +20,8 @@ x1 - ssa value
 
 * users(x1) - множество ssa value, которые используют x1, в этом отношении x1 являтеся используемым.
 * replace_uses_with(I, V, N) - заменить все вхождения V в инструкции I на N
+* ssa_users - множество юзеров value
+* ssa_uses - множество операндов
 
 Каждая инструкция порождает ssa value: можно переходить от инструкции к ssa value. (Instruction is Value)
 
