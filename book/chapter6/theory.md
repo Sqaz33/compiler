@@ -36,3 +36,47 @@
    ```
 
 ## RTA
+
+```python
+build_virtual_calls_targets(CallGraph CG,
+                            Function Root) {
+    Stack<Function> Methods;
+    List<Function> CallSites;
+    Vector<List<Function>> VCT(CG.size());
+    auto Classes = GetFEClassesInfo();
+    for (auto M : CG) Visited[M] = false;
+    for (auto C : Classes) Live[C] = false;
+    Methods.push(Root);
+
+    while (!Methods.empty()) {
+        auto M = Methods.pop();
+        if (Visited[M]) continue;
+
+        for (auto CS : CG.callsites(M)) {
+            if (CS.virtual()) {
+                VCT[M].add(CS.static_type());
+                CallSites.add(CS);
+                continue;
+            }
+
+            for (auto TM : CG.targets(CS))
+                Methods.push(TM);
+        }
+
+        for (auto C : GetFEInstantiations(M)) {
+            if (Live[C]) continue;
+            Live[C] = true;
+            for (auto CS : CallSites) {
+                TM = C.dynamic_target(CS);
+                if (!TM) continue;
+                VCT[M].add(TM);
+                Methods.push(TM);
+            }
+        }
+
+        Visited[M] = true;
+    }
+
+    return VCT;
+}
+```
